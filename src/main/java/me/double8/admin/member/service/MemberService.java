@@ -1,20 +1,20 @@
 package me.double8.admin.member.service;
 
 import lombok.RequiredArgsConstructor;
-import me.double8.admin.login.Login;
 import me.double8.admin.member.domain.Member;
 import me.double8.admin.member.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class MemberService implements Login {
+public class MemberService{
 
     private final MemberRepository memberRepository;
 
-    @Override
     @Transactional
     public Long joinMemberShip(Member member) {
         checkSameEmail(member);
@@ -23,8 +23,9 @@ public class MemberService implements Login {
     }
 
     private void checkSameEmail(Member member) {
-        if (!member.getEmail().isEmpty()) {
-            throw new IllegalStateException("이미 가입된 이메일 입니다.");
+        List<Member> findEmail = memberRepository.findByEmail(member.getEmail());
+        if (!findEmail.isEmpty()) {
+            throw new IllegalStateException("이미 존재하는 이메일 입니다.");
         }
     }
 }
