@@ -15,7 +15,7 @@
     </div>
 </header>
 <div class="container">
-    <form action="/member-login" th:action th:object="${member}" method="post">
+    <form action="/member-save" th:action th:object="${member}" method="post">
         <div class="id_pw_wrap">
             <div class="input_row" id="id_line">
                 <input type="email" id="email" th:field="*{email}" placeholder="아이디">

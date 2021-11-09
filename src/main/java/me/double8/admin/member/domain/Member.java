@@ -1,9 +1,6 @@
 package me.double8.admin.member.domain;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-@Getter
+@Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Member {
@@ -25,4 +22,8 @@ public class Member {
 
     @Column(nullable = false)
     private String password;
+
+    public void passwordEncryption(String password) {
+        this.password = password;
+    }
 }
